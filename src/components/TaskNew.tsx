@@ -6,11 +6,13 @@ import { descriptionType } from "../models/Tasks.model";
 
 type TaskNewProps = {
   handleAdd: (description: descriptionType) => void;
+  theme: "light" | "dark";
 };
 
-const TaskNew = ({ handleAdd }: TaskNewProps) => {
+const TaskNew = ({ handleAdd, theme }: TaskNewProps) => {
   const [newTask, setNewTask] = useState<descriptionType>("");
   const newTaskRef = useRef<HTMLInputElement>(null);
+  const isDarkTheme = theme === "dark";
 
   const handleChangeNewTask = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTask(e.target.value);
@@ -30,6 +32,7 @@ const TaskNew = ({ handleAdd }: TaskNewProps) => {
     <Form onSubmit={handleAddTask}>
       <InputGroup className='mb-3'>
         <Form.Control
+          className={isDarkTheme ? "bg-dark text-light border-secondary" : ""}
           ref={newTaskRef}
           type='text'
           placeholder='Enter new task'
@@ -38,7 +41,7 @@ const TaskNew = ({ handleAdd }: TaskNewProps) => {
         />
         <Button
           title='Add Task'
-          variant='outline-primary'
+          variant={isDarkTheme ? "outline-light" : "outline-primary"}
           disabled={!isValidTaskDescription(newTask)}
           id='button-addon2'
           onClick={handleAddTask}

@@ -1,0 +1,79 @@
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body.theme-light {
+  background: radial-gradient(circle at top right, #ffffff, #f1f3f5 65%);
+  color: #212529;
+}
+
+body.theme-dark {
+  background: radial-gradient(circle at top right, #1f2937, #0b1220 70%);
+  color: #e9ecef;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding-bottom: 5rem;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.theme-light {
+  background: radial-gradient(circle at top right, #ffffff, #f1f3f5 65%);
+  color: #212529;
+}
+
+.theme-dark {
+  background: radial-gradient(circle at top right, #1f2937, #0b1220 70%);
+  color: #e9ecef;
+}
+
+.theme-switch {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 1000;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+
+.theme-light .theme-switch {
+  background-color: rgba(248, 249, 250, 0.9);
+  border: 1px solid rgba(33, 37, 41, 0.15);
+}
+
+.theme-dark .theme-switch {
+  background-color: rgba(33, 37, 41, 0.8);
+  border: 1px solid rgba(248, 249, 250, 0.2);
+  color: #f8f9fa;
+}
+
+.theme-dark .form-check-input {
+  background-color: #495057;
+  border-color: #6c757d;
+}
+
+.theme-dark .form-check-label {
+  color: #f8f9fa;
+}
+
+.theme-dark .table {
+  color: #f8f9fa;
+  border-color: #495057;
+}
+
+.theme-dark .table > :not(caption) > * > * {
+  background-color: rgba(33, 37, 41, 0.72);
+}
+
+.theme-dark .form-control::placeholder {
+  color: #adb5bd;
+}
