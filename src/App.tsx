@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { TaskList } from "./components/TaskList";
 import { TasksProvider } from "./context/TasksProvider";
+import { useThemeStore } from "./store/theme.store";
 
 function App() {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const theme = isDarkTheme ? "dark" : "light";
+  const theme = useThemeStore((state) => state.theme);
+  const setTheme = useThemeStore((state) => state.setTheme);
+  const isDarkTheme = theme === "dark";
 
   useEffect(() => {
     document.body.classList.remove("theme-light", "theme-dark");
@@ -24,7 +26,7 @@ function App() {
           id='theme-switch'
           label={isDarkTheme ? "Dark" : "Light"}
           checked={isDarkTheme}
-          onChange={(e) => setIsDarkTheme(e.target.checked)}
+          onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
         />
       </Form>
     </div>
