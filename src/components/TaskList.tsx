@@ -39,6 +39,7 @@ export const TaskList = ({ theme }: TaskListProps) => {
       <Table bordered hover className='mt-4' variant={isDarkTheme ? "dark" : undefined}>
         <thead>
           <tr>
+            <th className='text-center' style={{ width: "3rem" }}>Item</th>
             <th className='col-8 col-md-10'>Task</th>
             <th className='col-4 col-md-2 text-center'>Actions</th>
           </tr>
@@ -47,6 +48,7 @@ export const TaskList = ({ theme }: TaskListProps) => {
           {tasks.map((task: Task, index: number) => (
             <TaskItem
               key={task.id}
+              order={index + 1}
               task={task}
               handleToggle={toogleTask}
               handleRemove={removeTask}

@@ -2,6 +2,7 @@ import { BsCheckCircle, BsDashCircle, BsGripVertical } from "react-icons/bs";
 import { idType, Task } from "../models/Tasks.model";
 
 type TaskItemProps = {
+  order: number;
   task: Task;
   handleToggle: (id: idType) => void;
   handleRemove: (id: idType) => void;
@@ -11,7 +12,7 @@ type TaskItemProps = {
   isDragOver: boolean;
 };
 
-const TaskItem = ({ task, handleToggle, handleRemove, onDragStart, onDragOver, onDrop, isDragOver }: TaskItemProps) => {
+const TaskItem = ({ order, task, handleToggle, handleRemove, onDragStart, onDragOver, onDrop, isDragOver }: TaskItemProps) => {
   return (
     <tr
       draggable
@@ -24,10 +25,12 @@ const TaskItem = ({ task, handleToggle, handleRemove, onDragStart, onDragOver, o
         borderTop: isDragOver ? "2px solid #0d6efd" : undefined,
       }}
     >
+      <td className='text-center' style={{ width: "3rem" }}>
+        {order}
+      </td>
       <td
-        className={`${
-          task.done ? "text-decoration-line-through text-muted" : ""
-        }`}
+        className={`${task.done ? "text-decoration-line-through text-muted" : ""
+          }`}
         onClick={() => handleToggle(task.id)}
         style={{ userSelect: "none" }}
       >
