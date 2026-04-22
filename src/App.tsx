@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { TaskList } from "./components/TaskList";
-import { TasksProvider } from "./context/TasksProvider";
 import { useThemeStore } from "./store/theme.store";
 
 function App() {
@@ -16,9 +15,7 @@ function App() {
 
   return (
     <div className={`app-shell theme-${theme}`}>
-      <TasksProvider>
-        <TaskList theme={theme} />
-      </TasksProvider>
+      <TaskList theme={theme} />
 
       <Form className='theme-switch'>
         <Form.Check
