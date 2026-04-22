@@ -5,11 +5,13 @@ export const useTasks = () => {
   const addTask = useTasksStore((state) => state.addTask);
   const toogleTask = useTasksStore((state) => state.toogleTask);
   const removeTask = useTasksStore((state) => state.removeTask);
+  const reorderTasks = useTasksStore((state) => state.reorderTasks);
 
   return {
     tasks,
     addTask,
     toogleTask,
     removeTask,
+    reorderTasks,
   };
 };

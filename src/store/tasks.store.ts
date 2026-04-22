@@ -7,6 +7,7 @@ type TasksStore = {
   addTask: (description: descriptionType) => void;
   toogleTask: (id: idType) => void;
   removeTask: (id: idType) => void;
+  reorderTasks: (fromIndex: number, toIndex: number) => void;
 };
 
 export const useTasksStore = create<TasksStore>((set) => ({
@@ -32,4 +33,11 @@ export const useTasksStore = create<TasksStore>((set) => ({
     set((state) => ({
       tasks: state.tasks.filter((task) => task.id !== id),
     })),
+  reorderTasks: (fromIndex, toIndex) =>
+    set((state) => {
+      const updated = [...state.tasks];
+      const [moved] = updated.splice(fromIndex, 1);
+      updated.splice(toIndex, 0, moved);
+      return { tasks: updated };
+    }),
 }));

@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import { useTasks } from "../hooks/useTasks";
 import { Task } from "../models/Tasks.model";
@@ -9,8 +10,28 @@ type TaskListProps = {
 };
 
 export const TaskList = ({ theme }: TaskListProps) => {
-  const { tasks, addTask, toogleTask, removeTask } = useTasks();
+  const { tasks, addTask, toogleTask, removeTask, reorderTasks } = useTasks();
   const isDarkTheme = theme === "dark";
+  const dragIndexRef = useRef<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+
+  const handleDragStart = (index: number) => {
+    dragIndexRef.current = index;
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    setDragOverIndex(index);
+  };
+
+  const handleDrop = (toIndex: number) => {
+    const fromIndex = dragIndexRef.current;
+    if (fromIndex !== null && fromIndex !== toIndex) {
+      reorderTasks(fromIndex, toIndex);
+    }
+    dragIndexRef.current = null;
+    setDragOverIndex(null);
+  };
 
   return (
     <Container className='mt-5 col-lg-7'>
@@ -25,10 +46,14 @@ export const TaskList = ({ theme }: TaskListProps) => {
         <tbody>
           {tasks.map((task: Task, index: number) => (
             <TaskItem
-              key={index}
+              key={task.id}
               task={task}
               handleToggle={toogleTask}
               handleRemove={removeTask}
+              onDragStart={() => handleDragStart(index)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDrop={() => handleDrop(index)}
+              isDragOver={dragOverIndex === index}
             />
           ))}
         </tbody>
